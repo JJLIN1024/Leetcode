@@ -59,6 +59,7 @@ public:
         while(b <= a) {
             c = b;
             long long count = 1;
+            // check (c << 1) <= a first, not while(c <= a)
             while((c << 1) <= a) {
                 c = c << 1;
                 count = count << 1;
