@@ -37,6 +37,7 @@ Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
 ### Code
 
+### Binary Search
 ```cpp
 class Solution {
     
@@ -56,7 +57,7 @@ public:
 
 
     double findKth(vector<int>& nums1, int a, int n, vector<int>& nums2, int b, int m, int k) {
-        
+
         // Find the kth smaller, 0-based
         if(n > m) 
             return findKth(nums2, b, m, nums1, a, n, k);
@@ -77,6 +78,62 @@ public:
 
 };
 ```
+### Heap
+```cpp
+class Solution {
+    struct comp {
+        bool operator()(pair<int, int> p1, pair<int, int> p2) {
+            return p1.first > p2.first;
+        }
+    };
+    
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums1.size();
+        int m = nums2.size();
+        if((n + m) % 2 == 0) {
+            return (findKth(nums1, 0, n, nums2, 0, m, (n + m) / 2) + findKth(nums1, 0, n, nums2, 0, m, ((n + m) / 2) + 1)) / 2;
+        } else {
+            return findKth(nums1, 0, n, nums2, 0, m, ((n + m ) / 2) + 1);
+        }
+        
+    }
+
+    double findKth(vector<int>& nums1, int a, int n, vector<int>& nums2, int b, int m, int k) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, comp> pq;
+
+        int i = 0, j = 0;
+        if(nums1.size() != 0) {
+            pq.push({nums1[i], 1});
+            i++;
+        }
+        if(nums2.size() != 0) {
+            pq.push({nums2[j], 2});
+            j++;
+        }
+        
+        int num = 0;
+        int count = 0;
+        while(!pq.empty() && count < k) {
+            int type = pq.top().second;
+            num = pq.top().first;
+            pq.pop();
+            count++;
+
+            if(type == 1 && i < nums1.size()) {
+                pq.push({nums1[i], 1});
+                i++;
+            } else if (type == 2 && j < nums2.size()) {
+                pq.push({nums2[j], 2});
+                j++;
+            }
+        }
+        return num;
+    }
+
+};
+```
+
 
 ## Source
 - [Median of Two Sorted Arrays - LeetCode](https://leetcode.com/problems/median-of-two-sorted-arrays/)
