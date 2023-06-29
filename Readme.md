@@ -1,4 +1,4 @@
-![Leetcode Stats](https://leetcard.jacoblin.cool/shibalover)
+![Leetcode Stats](https://leetcard.jacoblin.cool/shibalover?theme=dark&ext=contest)
 
 
 ## Useful Links
