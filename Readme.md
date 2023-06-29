@@ -1,3 +1,6 @@
+![Leetcode Stats](https://leetcard.jacoblin.cool/shibalover)
+
+
 ## Useful Links
 
 - [演算法筆記](https://web.ntnu.edu.tw/~algo/)
